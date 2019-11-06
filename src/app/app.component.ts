@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'se3316-jlee2978-lab4';
+  title = 'Item Library';
 }
