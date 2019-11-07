@@ -14,13 +14,18 @@ export class ItemService {
   constructor(private http: HttpClient) { }
 
   //http GET method
-  getItemsByName(searchName: string): Observable<any> {
+  getItemsByName(searchName: string) : Observable<any> {
     if (searchName == "") {
       return this.http.get<any>(this.url + "getitems");
     }
     else {
       return this.http.get<any>(this.url + "getitemsbyname/" + searchName);
     }
+  }
+
+  //http POST method
+  createItem(item: IItem) : Observable<IResponse> {
+    return this.http.post<IResponse>(this.url + "createitem", item);
   }
 
 }
