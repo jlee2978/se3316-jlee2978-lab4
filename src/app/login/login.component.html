@@ -1,1 +1,10 @@
-<p>login works!</p>
+<label>User Id: </label>
+<input type='text' id='userid' name='userid' [(ngModel)]='userid' value='' required autofocus>
+
+<label>Password: </label>
+<input type='password' id='userpwd' value='' [(ngModel)]='userpwd' required>
+
+<button (click)='login()'>Login</button>
+<div>
+    <span *ngIf='loginError' class='error'>Invalid user id or password, please try again!</span>
+</div>
