@@ -1,1 +1,64 @@
-<p>item works!</p>
+<div id='search-section'>
+    <div style='float:right'>
+        User: <span id='signedinuser'>{{userid}}</span>
+        <button (click)='logout()'>Log out</button>
+    </div>
+
+    Item Name: <input type='text' #searchNameElement id='search-name' name="searchName" [(ngModel)]="searchName"
+        autofocus>
+    <button (click)='getItemsByName()'>Search</button>
+</div>
+
+<div style="margin-bottom: 10px">
+polling : <input id="polling" type="checkbox" checked>
+<span>You may turn off polling if you want to do update, delete or create</span>
+</div>
+
+<table id='item-list' style='margin: auto; margin-bottom:10px'>
+    <thead>
+        <tr>
+            <th>{{role == 'admin'? 'Action' : 'Item No'}}</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Period</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+
+    <tr *ngFor="let item of items; let i=index">
+        <td>
+            <button (click)="saveItem(item)" *ngIf="role=='admin'">Save</button>
+            <button (click)="deleteItem(item._id, i)" *ngIf="role=='admin'"
+                style="margin-left:5%; float: right;">Delete</button>
+            <input type="text" *ngIf="role=='user'" disabled value="{{i + 1}}">
+        </td>
+        <td><input type="text" required="" name="name" value="{{item.name}}" [(ngModel)]="item.name"
+                [disabled]="role=='user'"></td>
+        <td>
+            <select name="type" [(ngModel)]="item.type" [disabled]="role=='user'">
+                <option selected="'{{item.type}}'=='Book'" value="Book">Book</option>
+                <option selected="'{{item.type}}'=='CD'" value="CD">CD</option>
+            </select>
+        </td>
+        <td><input type="number" name="period" value="{{item.period}}" [(ngModel)]="item.period"
+                [disabled]="role=='user'"></td>
+        <td><input type="number" name="quantity" value="{{item.quantity}}" [(ngModel)]="item.quantity"
+                [disabled]="role=='user'"></td>
+    </tr>
+
+</table>
+
+<form id="createitem" *ngIf="role=='admin'" accept-charset="UTF-8">
+    <fieldset>
+        <legend>Create a new item:-</legend>
+        Name: <input type="text" id="name" name="name" required value="" class="item" [(ngModel)]="newItem.name">
+        Type: <select id="type" name="type" required class="item" [(ngModel)]="newItem.type">
+            <option value="Book" selected>Book</option>
+            <option value="CD">CD</option>
+        </select>
+        Period: <input type="number" id="period" name="period" value="" class="item" [(ngModel)]="newItem.period">
+        Quantity: <input type="number" id="quantity" required name="quantity" class="item"
+            [(ngModel)]="newItem.quantity">
+        <button (click)='createItem(newItem)'>Create</button>
+    </fieldset>
+</form>

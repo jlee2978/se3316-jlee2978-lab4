@@ -28,4 +28,12 @@ export class ItemService {
     return this.http.post<IResponse>(this.url + "createitem", item);
   }
 
+  saveItem(item : IItem) : Observable<IResponse> {  
+    return this.http.put<IResponse>(this.url + "updateitem/"+item._id, item);
+  }
+
+  deleteItem(id : string) : Observable<IResponse> {
+    return this.http.delete<IResponse>(this.url + "deleteitem/" + id);
+  }
+
 }
