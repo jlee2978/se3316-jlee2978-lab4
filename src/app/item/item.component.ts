@@ -55,4 +55,16 @@ export class ItemComponent implements OnInit {
       response => this.items.push(response.item));
     this.newItem = {_id: "", name: "", type: "Book", period: null, quantity: null};
   }
+
+  updateItem(item: IItem) {
+    this._service.updateItem(item).subscribe();
+  }
+
+  deleteItem(id: string, i: number) {
+    this._service.deleteItem(id).subscribe(
+      response => {if (response.error.code == 0) {
+        this.items.splice(i, 1);
+      }
+    });
+  }
 }
