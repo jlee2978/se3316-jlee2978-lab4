@@ -47,16 +47,18 @@ export class ItemComponent implements OnInit {
   // Restful API calls
   getItemsByName() {
     this._service.getItemsByName(this.searchName).subscribe(
-      data => this.items = data.items);
+      response => this.items = response.items);
   }
 
   createItem(item: IItem) {
+    item.name = this.sanitize(item.name);
     this._service.createItem(item).subscribe(
       response => this.items.push(response.item));
     this.newItem = {_id: "", name: "", type: "Book", period: null, quantity: null};
   }
 
   updateItem(item: IItem) {
+    item.name = this.sanitize(item.name);
     this._service.updateItem(item).subscribe();
   }
 
@@ -66,5 +68,21 @@ export class ItemComponent implements OnInit {
         this.items.splice(i, 1);
       }
     });
+  }
+
+  // Sanitize data
+  sanitize(data: any) {
+    return data.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  logout() {
+    this.role = '';
+    this.items = [];
+
+    // unsubscribe subscription
+    this.subscription.unsubscribe();
+    
+    // navigate back to the login page
+    this.router.navigate(['/login', '']);
   }
 }
