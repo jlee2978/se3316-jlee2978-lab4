@@ -33,15 +33,26 @@ export class ItemComponent implements OnInit {
     // get the role value from the URL
     this.role = this.route.snapshot.paramMap.get("role");
 
-    // if role is user, turn on polling
+    // if role is user, subscribe polling
     if (this.role == 'user') {
       this.subscription = this.polling.subscribe(v => { this.getItemsByName(); this.searchNameElement.nativeElement.focus() });
     }
+  }
+
+  ngOnDestroy() {
+    // unsubscribe polling
+    this.subscription.unsubscribe();
   }
 
   // Restful API calls
   getItemsByName() {
     this._service.getItemsByName(this.searchName).subscribe(
       data => this.items = data.items);
+  }
+
+  createItem(item: IItem) {
+    this._service.createItem(item).subscribe(
+      response => this.items.push(response.item));
+    this.newItem = {_id: "", name: "", type: "Book", period: null, quantity: null};
   }
 }
