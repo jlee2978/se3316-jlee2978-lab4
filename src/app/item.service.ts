@@ -28,7 +28,7 @@ export class ItemService {
     return this.http.post<IResponse>(this.url + "createitem", item);
   }
 
-  saveItem(item : IItem) : Observable<IResponse> {  
+  updateItem(item : IItem) : Observable<IResponse> {  
     return this.http.put<IResponse>(this.url + "updateitem/"+item._id, item);
   }
 

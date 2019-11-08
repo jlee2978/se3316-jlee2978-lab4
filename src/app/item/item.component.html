@@ -9,11 +9,6 @@
     <button (click)='getItemsByName()'>Search</button>
 </div>
 
-<div style="margin-bottom: 10px">
-polling : <input id="polling" type="checkbox" checked>
-<span>You may turn off polling if you want to do update, delete or create</span>
-</div>
-
 <table id='item-list' style='margin: auto; margin-bottom:10px'>
     <thead>
         <tr>
@@ -27,7 +22,7 @@ polling : <input id="polling" type="checkbox" checked>
 
     <tr *ngFor="let item of items; let i=index">
         <td>
-            <button (click)="saveItem(item)" *ngIf="role=='admin'">Save</button>
+            <button (click)="updateItem(item)" *ngIf="role=='admin'">Save</button>
             <button (click)="deleteItem(item._id, i)" *ngIf="role=='admin'"
                 style="margin-left:5%; float: right;">Delete</button>
             <input type="text" *ngIf="role=='user'" disabled value="{{i + 1}}">
