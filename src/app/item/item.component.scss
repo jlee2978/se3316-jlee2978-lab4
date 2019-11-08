@@ -1,0 +1,36 @@
+#search-section {margin-bottom:30px;}
+#createitem {margin-top:30px;}
+table {width:90%; 
+ 		 border: 1px solid black;
+		 margin:auto;
+		}
+table tr td {margin-right: 10px;}
+table th {
+  border: 1px solid black; padding: none;
+}
+
+table th {background-color: navy; color: white;}
+
+
+table input, table select {width: 100%;}
+
+table tr th:nth-child(1), table tr td:nth-child(1) {width: 8%;}
+table tr th:nth-child(2), table tr td:nth-child(2) {width: 70%;}
+table tr th:nth-child(3), table tr td:nth-child(3) {width: 10%;}
+table tr th:nth-child(4), table tr td:nth-child(4) {width: 6%;}
+table tr th:nth-child(5), table tr td:nth-child(5) {width: 6%;}
+
+//  table tr:nth-child(even) {background: #CCC}
+// table tr:nth-child(odd) {background: #FFF}
+
+button {
+    background-color: #4CAF50;
+    border-color: black;
+    border-width: thin;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 4px;
+  }

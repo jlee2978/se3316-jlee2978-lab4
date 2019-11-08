@@ -13,6 +13,7 @@ export class ItemComponent implements OnInit {
   @ViewChild('searchNameElement', { static: false }) searchNameElement: ElementRef;
 
   title = 'Item';
+  private userid: string = '';
   private searchName = "";
   private role: string = '';   //will either take the value of "user" or "admin"
 
@@ -30,8 +31,12 @@ export class ItemComponent implements OnInit {
    }
 
   ngOnInit() {
-    // get the role value from the URL
+    // get the role and userid values from the URL
     this.role = this.route.snapshot.paramMap.get("role");
+    this.userid = this.route.snapshot.paramMap.get("userid");
+
+    // display items
+    this.getItemsByName();
 
     // if role is user, subscribe polling
     if (this.role == 'user') {
